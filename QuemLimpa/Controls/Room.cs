@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace QuemLimpa.Controls
 {
@@ -14,7 +15,26 @@ namespace QuemLimpa.Controls
         public Room(int cleanerQtd)
         {
             colaboradores = new List<Colaborador>();
-            string[] nomes = File.ReadAllLines("DB\\Alunos.csv");
+
+            string[] nomes = new string[]
+            {
+                "Manu",
+                "Gabi",
+                "Iago",
+                "Thiago",
+                "Maitê",
+                "Bruno",
+                "Carioca",
+                "Kaiky",
+                "Fortunato",
+                "Felipe",
+                "Hemerson",
+                "André",
+                "Leonardo",
+                "Freire",
+                "Ramirez",
+                "Murilo"
+            };
 
             if (nomes.Length < cleanerQtd)
                 throw new ArgumentException("Quantidade de limpadores invalida");
