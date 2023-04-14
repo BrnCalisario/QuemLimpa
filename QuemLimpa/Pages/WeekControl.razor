@@ -1,25 +1,28 @@
-﻿<div class="days">
-    @for(int i = 0; i < WeekString.Length; i++)
-    {
-        <DayBox 
-            DayName="@WeekString[i]" 
-            Index=@(i) 
-            ClickCallback="HandleBoxClick"
-            isSelected=@(i == selectedDay) 
-            Day="@(WeekDays[i].Item2)"
-        />
-    }
-</div>
-
-<div class="cleaner-box">
-        
-    <h1>Quem limpa:</h1>
-    <h3>@foreach (var p in WeekDays[selectedDay].Item1)
+﻿
+<div class="box-days">
+    <div class="days">
+        @for(int i = 0; i < WeekString.Length; i++)
         {
-            <span>@p</span>   
-            <br />
+            <DayBox 
+                DayName="@WeekString[i]" 
+                Index=@(i) 
+                ClickCallback="HandleBoxClick"
+                isSelected=@(i == selectedDay) 
+                Day="@(WeekDays[i].Item2)"
+            />
         }
-    </h3>
+    </div>
+
+    <div class="cleaner-box">
+        
+        <h1>Quem limpa:</h1>
+        <h3>@foreach (var p in WeekDays[selectedDay].Item1)
+            {
+                <span>@p</span>   
+                <br />
+            }
+        </h3>
+    </div>
 </div>
 
 @code {
