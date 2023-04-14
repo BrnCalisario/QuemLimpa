@@ -1,0 +1,46 @@
+﻿<div class="days">
+    @for(int i = 0; i < WeekString.Length; i++)
+    {
+        <DayBox 
+            DayName="@WeekString[i]" 
+            Index=@(i) 
+            ClickCallback="HandleBoxClick"
+            isSelected=@(i == selectedDay) 
+            Day="@(WeekDays[i].Item2)"
+        />
+    }
+</div>
+
+<div class="cleaner-box">
+        
+    <h1>Quem limpa:</h1>
+    <h3>@foreach (var p in WeekDays[selectedDay].Item1)
+        {
+            <span>@p</span>   
+            <br />
+        }
+    </h3>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        WeekDays = sala.GetWeekCleaners(DateTime.Today);
+    }
+
+    private Room sala  = new Room(3);
+
+    private List<(string[], DateTime)> WeekDays { get; set; } = new List<(string[], DateTime)>();
+
+    private int selectedDay { get; set; } = (int)DateTime.Now.DayOfWeek - 1;
+
+    private string[] WeekString = { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" };
+
+    private void HandleBoxClick(int index)
+    {
+        this.selectedDay = index;
+        Console.WriteLine("Teste" + index);
+    }
+}

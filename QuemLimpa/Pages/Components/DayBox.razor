@@ -1,0 +1,44 @@
+﻿<div class="day-box @(isSelected ? "selected" : "")"
+     @onclick=@HandleClick>
+    @DayName-Feira
+    <div class="day-number">
+        @DayNumber
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public int Index { get; set; }
+
+    [Parameter]
+    public string DayName { get; set; } = "";
+
+    [Parameter]
+    public DateTime Day { get; set; }
+
+    public string DayNumber { get; set; } = "";
+
+    [Parameter]
+    public bool isSelected { get; set; } = false;
+
+    [Parameter]
+    public EventCallback<int> ClickCallback { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        string d = Day.Day < 10 ? "0" + Day.Day : Day.Day.ToString();
+        string m = Day.Month < 10 ? "0" + Day.Month : Day.Month.ToString();
+
+        DayNumber = d + "/" + m;
+    }
+
+    private async Task HandleClick(MouseEventArgs e)
+    {
+        if (e.Button == 0)
+            await ClickCallback.InvokeAsync(this.Index);
+    }
+
+}
