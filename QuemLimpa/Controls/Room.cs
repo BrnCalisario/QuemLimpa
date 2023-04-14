@@ -44,7 +44,7 @@ namespace QuemLimpa.Controls
             foreach (var nome in nomes)
                 colaboradores.Add(new Colaborador() { Name = nome });
 
-            DayCleanGenerator(new DateTime(2023, 1, 1));
+            DayCleanGenerator(new DateTime(2023, 3, 16));
             GetWeekCleaners(new DateTime(2023, 4, 15));
         }
 
