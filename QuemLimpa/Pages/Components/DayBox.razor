@@ -28,12 +28,23 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        formatDayNumber();
+    }
 
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        formatDayNumber();
+    }
+
+    private void formatDayNumber()
+    {
         string d = Day.Day < 10 ? "0" + Day.Day : Day.Day.ToString();
         string m = Day.Month < 10 ? "0" + Day.Month : Day.Month.ToString();
 
         DayNumber = d + "/" + m;
     }
+
 
     private async Task HandleClick(MouseEventArgs e)
     {

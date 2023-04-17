@@ -1,5 +1,8 @@
-﻿
-<div class="box-days">
+﻿<div class="box-days">
+    <div class="arrow arrow-left" @onclick="(() => shiftWeek(-1))">
+        <i class="fas fa-chevron-left"></i>
+    </div>
+    
     <div class="days">
         @for(int i = 0; i < WeekString.Length; i++)
         {
@@ -13,29 +16,39 @@
         }
     </div>
 
-    <div class="cleaner-box">
-        
-        <h1>Quem limpa:</h1>
-        <h3>@foreach (var p in WeekDays[selectedDay].Item1)
-            {
-                <span>@p</span>   
-                <br />
-            }
-        </h3>
+    <div class="arrow arrow-left" @onclick="(() => shiftWeek(1))">
+        <i class="fas fa-chevron-right"></i>
     </div>
 </div>
+
+<div class="cleaner-box">
+
+    <h1>Quem limpa:</h1>
+    <h3>
+        @foreach (var p in WeekDays[selectedDay].Item1)
+        {
+            <span>@p</span>
+            <br />
+        }
+    </h3>
+</div>
+
+
 
 @code {
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        WeekDays = sala.GetWeekCleaners(DateTime.Today);
+        WeekControler = DateTime.Today;
+        WeekDays = sala.GetWeekCleaners(WeekControler);
     }
 
     private Room sala  = new Room(3);
 
     private List<(string[], DateTime)> WeekDays { get; set; } = new List<(string[], DateTime)>();
+
+    private DateTime WeekControler { get; set; }
 
     private int selectedDay { get; set; } = (int)DateTime.Now.DayOfWeek - 1;
 
@@ -44,6 +57,15 @@
     private void HandleBoxClick(int index)
     {
         this.selectedDay = index;
-        Console.WriteLine("Teste" + index);
+    }
+
+    private void shiftWeek(int direction)
+    {
+        do
+        {
+            this.WeekControler = this.WeekControler.AddDays(direction);
+        } while (this.WeekControler.DayOfWeek != DayOfWeek.Monday);
+
+        WeekDays = sala.GetWeekCleaners(WeekControler);
     }
 }

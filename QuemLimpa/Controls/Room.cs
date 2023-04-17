@@ -98,7 +98,6 @@ namespace QuemLimpa.Controls
                 aux = day.AddDays(-weekDay + i);
                 var query = Cleaners.First(l => l.day == aux);
                 weekList.Add(query);
-                Console.WriteLine(aux);
             }
 
             return weekList;
