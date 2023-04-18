@@ -1,37 +1,44 @@
-﻿<div class="box-days">
-    <div class="arrow arrow-left" @onclick="(() => shiftWeek(-1))">
-        <i class="fas fa-chevron-left"></i>
-    </div>
+﻿@*<div class="arrow arrow-left" @onclick="(() => shiftWeek(-1))">
+    <i class="fas fa-chevron-left"></i>
+</div>*@
+<div class="big-box">
+    <div class="box-days">
+        <div class="arrow arrow-left" @onclick="(() => shiftWeek(-1))">
+            <i class="fas fa-chevron-left"></i>
+        </div>
     
-    <div class="days">
-        @for(int i = 0; i < WeekString.Length; i++)
-        {
-            <DayBox 
-                DayName="@WeekString[i]" 
-                Index=@(i) 
-                ClickCallback="HandleBoxClick"
-                isSelected=@(i == selectedDay) 
-                Day="@(WeekDays[i].Item2)"
-            />
-        }
-    </div>
+        <div class="days">
+            @for(int i = 0; i < WeekString.Length; i++)
+            {
+                <DayBox 
+                    DayName="@WeekString[i]" 
+                    Index=@(i) 
+                    ClickCallback="HandleBoxClick"
+                    isSelected=@(i == selectedDay) 
+                    Day="@(WeekDays[i].Item2)"
+                />
+            }
+        </div>
 
-    <div class="arrow arrow-left" @onclick="(() => shiftWeek(1))">
-        <i class="fas fa-chevron-right"></i>
+        <div class="arrow arrow-left" @onclick="(() => shiftWeek(1))">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </div>
+    <div class="cleaner-box">
+
+        <h1>Quem limpa:</h1>
+        <h3>
+            @foreach (var p in WeekDays[selectedDay].Item1)
+            {
+                <span>@p</span>
+                <br />
+            }
+        </h3>
     </div>
 </div>
-
-<div class="cleaner-box">
-
-    <h1>Quem limpa:</h1>
-    <h3>
-        @foreach (var p in WeekDays[selectedDay].Item1)
-        {
-            <span>@p</span>
-            <br />
-        }
-    </h3>
-</div>
+@*<div class="arrow arrow-left" @onclick="(() => shiftWeek(1))">
+    <i class="fas fa-chevron-right"></i>
+</div>*@
 
 
 
